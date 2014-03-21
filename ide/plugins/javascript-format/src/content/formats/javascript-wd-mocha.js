@@ -180,12 +180,12 @@ function pause(milliseconds) {
 }
 
 function echo(message) {
-  return "p " + xlateArgument(message);
+  return "console.log(" + xlateArgument(message) + ")";
 }
 
 function formatComment(comment) {
   return comment.comment.replace(/.+/mg, function(str) {
-    return "# " + str;
+    return "// " + str;
   });
 }
 
