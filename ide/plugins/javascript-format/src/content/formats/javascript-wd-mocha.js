@@ -389,17 +389,17 @@ WDAPI.Driver.searchContext = function(locatorType, locator) {
   var locatorString = xlateArgument(locator);
   switch (locatorType) {
     case 'xpath':
-      return ':xpath, ' + locatorString;
+      return 'wd.By.xpath(' + locatorString + ')';
     case 'css':
-      return ':css, ' + locatorString;
+      return 'wd.By.css(' + locatorString + ')';
     case 'id':
-      return ':id, ' + locatorString;
+      return 'wd.By.id(' + locatorString + ')';
     case 'link':
-      return ':link, ' + locatorString;
+      return 'wd.By.partialLinkText(' + locatorString + ')';
     case 'name':
-      return ':name, ' + locatorString;
+      return 'wd.By.name(' + locatorString + ')';
     case 'tag_name':
-      return ':tag_name, ' + locatorString;
+      return 'wd.By.tagName(' + locatorString + ')';
   }
   throw 'Error: unknown strategy [' + locatorType + '] for locator [' + locator + ']';
 };
