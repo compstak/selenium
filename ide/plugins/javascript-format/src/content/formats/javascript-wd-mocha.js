@@ -327,8 +327,12 @@ this.options = {
           '    });\n' +
           '\n' +
           '    var isElementPresent = function (how, what) {\n' +
-          '        driver.findElement(how, what);\n' +
-          '        return true;\n' +
+          '        try {\n' +
+          '            driver.findElement(how, what);\n' +
+          '            return true;\n' +
+          '        } catch (exception) {\n' +
+          '            return false;\n' +
+          '        }\n' +
           '    };\n' +
           '\n' +
           '    afterEach(function (done) {\n' +
