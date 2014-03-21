@@ -323,41 +323,17 @@ this.options = {
           '    });\n' +
           '\n' +
           "    it('${methodName}', function (done) {\n",
-  footer: "  end\n" +
-          "  \n" +
-          "  def element_present?(how, what)\n" +
-          "    ${receiver}.find_element(how, what)\n" +
-          "    true\n" +
-          "  rescue Selenium::WebDriver::Error::NoSuchElementError\n" +
-          "    false\n" +
-          "  end\n" +
-          "  \n" +
-          "  def alert_present?()\n" +
-          "    ${receiver}.switch_to.alert\n" +
-          "    true\n" +
-          "  rescue Selenium::WebDriver::Error::NoAlertPresentError\n" +
-          "    false\n" +
-          "  end\n" +
-          "  \n" +
-          "  def verify(&blk)\n" +
-          "    yield\n" +
-          "  rescue ExpectationNotMetError => ex\n" +
-          "    @verification_errors << ex\n" +
-          "  end\n" +
-          "  \n" +
-          "  def close_alert_and_get_its_text(how, what)\n" +
-          "    alert = ${receiver}.switch_to().alert()\n" +
-          "    alert_text = alert.text\n" +
-          "    if (@accept_next_alert) then\n" +
-          "      alert.accept()\n" +
-          "    else\n" +
-          "      alert.dismiss()\n" +
-          "    end\n" +
-          "    alert_text\n" +
-          "  ensure\n" +
-          "    @accept_next_alert = true\n" +
-          "  end\n" +
-          "end\n",
+  footer: '        done();\n' +
+          '    });\n' +
+          '\n' +
+          '    afterEach(function (done) {\n' +
+          '        driver.quit().then(function () {\n' +
+          '            done();\n' +
+          '        });\n' +
+          '        verificationErrors.should.be.empty;\n' +
+          '    });\n' +
+          '\n' +
+          '});\n',
   indent: "4",
   initialIndents: "2",
   defaultExtension: "js"
