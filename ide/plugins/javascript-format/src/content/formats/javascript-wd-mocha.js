@@ -358,7 +358,7 @@ this.options = {
           "    @accept_next_alert = true\n" +
           "  end\n" +
           "end\n",
-  indent: "2",
+  indent: "4",
   initialIndents: "2",
   defaultExtension: "js"
 };
