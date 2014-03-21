@@ -326,6 +326,11 @@ this.options = {
   footer: '        done();\n' +
           '    });\n' +
           '\n' +
+          '    var isElementPresent = function (how, what) {\n' +
+          '        driver.findElement(how, what);\n' +
+          '        return true;\n' +
+          '    };\n' +
+          '\n' +
           '    afterEach(function (done) {\n' +
           '        driver.quit().then(function () {\n' +
           '            done();\n' +
@@ -397,7 +402,7 @@ WDAPI.Driver.prototype.close = function() {
 };
 
 WDAPI.Driver.prototype.findElement = function(locatorType, locator) {
-  return new WDAPI.Element(this.ref + ".find_element(" + WDAPI.Driver.searchContext(locatorType, locator) + ")");
+  return new WDAPI.Element(this.ref + ".findElement(" + WDAPI.Driver.searchContext(locatorType, locator) + ")");
 };
 
 WDAPI.Driver.prototype.findElements = function(locatorType, locator) {
@@ -503,7 +508,7 @@ WDAPI.Utils = function() {
 };
 
 WDAPI.Utils.isElementPresent = function(how, what) {
-  return "element_present?(:" + how + ", " + xlateArgument(what) + ")";
+  return "isElementPresent(" + how + ", " + xlateArgument(what) + ")";
 };
 
 WDAPI.Utils.isAlertPresent = function() {
