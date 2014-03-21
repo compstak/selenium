@@ -308,22 +308,21 @@ this.options = {
   header: "var wd = require('selenium-webdriver');\n" +
           "var should = require('chai').should();\n" + // actually call the function
           '\n' +
-          'describe "${className}" do\n' +
+          "describe('${className}', function () {\n" +
           '\n' +
-          '  before(:each) do\n' +
-          '    ${receiver} = Selenium::WebDriver.for :firefox\n' +
-          '    @base_url = "${baseURL}"\n' +
-          '    @accept_next_alert = true\n' +
-          '    ${receiver}.manage.timeouts.implicit_wait = 30\n' +
-          '    @verification_errors = []\n' +
-          '  end\n' +
-          '  \n' +
-          '  after(:each) do\n' +
-          '    ${receiver}.quit\n' +
-          '    @verification_errors.should == []\n' +
-          '  end\n' +
-          '  \n' +
-          '  it "${methodName}" do\n',
+          '    var driver;\n' +
+          '    var baseUrl;\n' +
+          '    var verificationErrors;\n' +
+          '\n' +
+          '    beforeEach(function (done) {\n' +
+          "        driver = require('./client.js').driver;\n" +
+          '        driver.manage().timeouts().implicitlyWait(30000);\n' +
+          "        baseUrl = '${baseURL}';\n" +
+          '        verificationErrors = [];\n' +
+          '        done();\n' +
+          '    });\n' +
+          '\n' +
+          "    it('${methodName}', function (done) {\n",
   footer: "  end\n" +
           "  \n" +
           "  def element_present?(how, what)\n" +
