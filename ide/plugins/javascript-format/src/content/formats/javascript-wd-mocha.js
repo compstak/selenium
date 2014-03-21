@@ -69,7 +69,7 @@ function joinExpression(expression) {
 
 function statement(expression) {
   expression.noBraces = true;
-  return expression.toString();
+  return expression.toString() + ';';
 }
 
 function assignToVariable(type, variable, expression) {
@@ -77,15 +77,15 @@ function assignToVariable(type, variable, expression) {
 }
 
 function ifCondition(expression, callback) {
-  return "if " + expression.toString() + "\n" + callback() + "end";
+  return "if (" + expression.toString() + ") {\n" + callback() + "}";
 }
 
 function tryCatch(tryStatement, catchStatement, exception) {
-  return "begin\n" +
+  return "try{\n" +
       indents(1) + tryStatement + "\n" +
-      "rescue " + exception + " => ex\n" +
+      "catch (" + exception + ") {\n" +
       indents(1) + catchStatement + "\n" +
-      "end";
+      "}";
 }
 
 function assertTrue(expression) {
