@@ -433,7 +433,7 @@ WDAPI.Driver.prototype.get = function(url) {
 };
 
 WDAPI.Driver.prototype.getTitle = function() {
-  return this.ref + ".title";
+  return this.ref + ".getTitle()";
 };
 
 WDAPI.Driver.prototype.getAlert = function() {
@@ -457,11 +457,11 @@ WDAPI.Element = function(ref) {
 };
 
 WDAPI.Element.prototype.clear = function() {
-  return this.ref + ".clear";
+  return this.ref + ".clear()";
 };
 
 WDAPI.Element.prototype.click = function() {
-  return this.ref + ".click";
+  return this.ref + ".click()";
 };
 
 WDAPI.Element.prototype.getAttribute = function(attributeName) {
@@ -481,7 +481,7 @@ WDAPI.Element.prototype.isSelected = function() {
 };
 
 WDAPI.Element.prototype.sendKeys = function(text) {
-  return this.ref + ".send_keys " + xlateArgument(text, 'args') + "";
+  return this.ref + ".sendKeys(" + xlateArgument(text, 'args') + ")";
 };
 
 WDAPI.Element.prototype.submit = function() {
