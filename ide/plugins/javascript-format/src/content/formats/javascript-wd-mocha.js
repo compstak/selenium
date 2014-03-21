@@ -303,12 +303,9 @@ function defaultExtension() {
 }
 
 this.options = {
-  receiver: "@driver",
+  receiver: "driver",
   showSelenese: 'false',
-  header: 'require "json"\n' +
-          'require "selenium-webdriver"\n' +
-          'require "rspec"\n' +
-          'include RSpec::Expectations\n' +
+  header: "var wd = require('selenium-webdriver');\n" +
           '\n' +
           'describe "${className}" do\n' +
           '\n' +
@@ -363,7 +360,7 @@ this.options = {
           "end\n",
   indent: "2",
   initialIndents: "2",
-  defaultExtension: "rb"
+  defaultExtension: "js"
 };
 
 this.configForm =
