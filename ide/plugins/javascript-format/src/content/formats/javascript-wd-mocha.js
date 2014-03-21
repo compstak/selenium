@@ -343,6 +343,13 @@ this.options = {
           '    });\n' +
           '\n' +
           '});\n',
+          // TODO do we need alert handling?
+          // TODO port the verify ruby method
+          // "  def verify(&blk)\n" +
+          // "    yield\n" +
+          // "  rescue ExpectationNotMetError => ex\n" +
+          // "    @verification_errors << ex\n" +
+          // "  end\n" +
   indent: "4",
   initialIndents: "2",
   defaultExtension: "js"
