@@ -36,15 +36,15 @@ function array(value) {
 }
 
 notOperator = function() {
-  return "not ";
+  return "!";
 };
 
 Equals.prototype.toString = function() {
-  return this.e2.toString() + " == " + this.e1.toString();
+  return this.e2.toString() + " === " + this.e1.toString();
 };
 
 Equals.prototype.assert = function() {
-  return "(" + this.e2.toString() + ").should == " + this.e1.toString();
+  return "(" + this.e2.toString() + ").should.equal(" + this.e1.toString() + ")";
 };
 
 Equals.prototype.verify = function() {
@@ -52,11 +52,11 @@ Equals.prototype.verify = function() {
 };
 
 NotEquals.prototype.toString = function() {
-  return this.e1.toString() + " != " + this.e2.toString();
+  return this.e1.toString() + " !== " + this.e2.toString();
 };
 
 NotEquals.prototype.assert = function() {
-  return "(" + this.e2.toString() + ").should_not == " + this.e1.toString();
+  return "(" + this.e2.toString() + ").should.not.equal(" + this.e1.toString() + ")";
 };
 
 NotEquals.prototype.verify = function() {
@@ -81,7 +81,7 @@ function ifCondition(expression, callback) {
 }
 
 function tryCatch(tryStatement, catchStatement, exception) {
-  return "try{\n" +
+  return "try {\n" +
       indents(1) + tryStatement + "\n" +
       "catch (" + exception + ") {\n" +
       indents(1) + catchStatement + "\n" +
@@ -92,9 +92,9 @@ function assertTrue(expression) {
   var exp = expression.toString();
   var r = exp.match(/^(.+)\.([0-9A-Za-z_]+)\?$/);
   if (r && r.length == 3) {
-    return r[1] + ".should be_" + r[2];
+    return r[1] + ".should.be(" + r[2] + ")";
   } else {
-    return exp + ".should be_true";
+    return exp + ".should.be(true)";
   }
 }
 
@@ -103,14 +103,14 @@ function assertFalse(expression) {
   var exp = expression.toString();
   var r = exp.match(/^(.+)\.([0-9A-Za-z_]+)\?$/);
   if (r && r.length == 3) {
-    return r[1] + ".should_not be_" + r[2];
+    return r[1] + ".should.not.be(" + r[2] + ")";
   } else {
-    return exp + ".should be_false";
+    return exp + ".should.be(false)";
   }
 }
 
 function verify(statement) {
-  return "verify { " + statement + " }";
+  return "verify(function() { " + statement + " })";
 }
 
 function verifyTrue(expression) {
@@ -127,7 +127,7 @@ RegexpMatch.patternAsRegEx = function(pattern) {
     str = str.replace(/\n/g, '\\n');
     return '/' + str + '/m';
   } else {
-    return str = '/' + str + '/';
+    return str = '/' + str + '/g';
   }
 };
 
@@ -136,11 +136,11 @@ RegexpMatch.prototype.patternAsRegEx = function() {
 };
 
 RegexpMatch.prototype.toString = function() {
-  return this.expression + " =~ " + this.patternAsRegEx();
+  return this.expression + ".match(" + this.patternAsRegEx() + ")";
 };
 
 RegexpMatch.prototype.assert = function() {
-  return this.expression + ".should =~ " + this.patternAsRegEx();
+  return this.expression + ".should.match(" + this.patternAsRegEx() + ")";
 };
 
 RegexpMatch.prototype.verify = function() {
@@ -152,11 +152,11 @@ RegexpNotMatch.prototype.patternAsRegEx = function() {
 };
 
 RegexpNotMatch.prototype.toString = function() {
-  return this.expression + " !~ " + this.patternAsRegEx();
+  return notOperator + this.expression + ".match(" + this.patternAsRegEx() + ")";
 };
 
 RegexpNotMatch.prototype.assert = function() {
-  return this.expression + ".should_not =~ " + this.patternAsRegEx();
+  return this.expression + ".should.not.match(" + this.patternAsRegEx() + ")";
 };
 
 RegexpNotMatch.prototype.verify = function() {
