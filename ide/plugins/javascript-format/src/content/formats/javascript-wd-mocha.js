@@ -306,6 +306,7 @@ this.options = {
   receiver: "driver",
   showSelenese: 'false',
   header: "var wd = require('selenium-webdriver');\n" +
+          "var should = require('chai').should();\n" + // actually call the function
           '\n' +
           'describe "${className}" do\n' +
           '\n' +
