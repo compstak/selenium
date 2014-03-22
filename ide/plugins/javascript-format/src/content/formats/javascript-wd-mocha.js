@@ -307,6 +307,7 @@ this.options = {
   showSelenese: 'false',
   header: "var wd = require('selenium-webdriver');\n" +
           "var should = require('chai').should();\n" + // actually call the function
+          "var AssertionError = require('chai').AssertionError;\n" +
           '\n' +
           "describe('${className}', function () {\n" +
           '\n' +
@@ -325,15 +326,7 @@ this.options = {
           "    it('${methodName}', function (done) {\n",
   footer: '        done();\n' +
           '    });\n' +
-          '\n' +
-          '    var isElementPresent = function (how, what) {\n' +
-          '        try {\n' +
-          '            driver.findElement(how, what);\n' +
-          '            return true;\n' +
-          '        } catch (exception) {\n' +
-          '            return false;\n' +
-          '        }\n' +
-          '    };\n' +
+          // '\n' +
           '\n' +
           '    afterEach(function (done) {\n' +
           '        driver.quit().then(function () {\n' +
@@ -342,14 +335,20 @@ this.options = {
           '        });\n' +
           '    });\n' +
           '\n' +
+          '    var verify = function (promise) {\n' +
+          '        try {\n' +
+          '            promise();\n' +
+          '        } catch (exception) {\n' +
+          '            if (exception instanceof AssertionError) {\n' +
+          '                verificationErrors.push(exception);\n' +
+          '            } else {\n' +
+          '                throw exception;\n' +
+          '            }\n' +
+          '        }\n' +
+          '    };\n' +
+          '\n' +
           '});\n',
           // TODO do we need alert handling?
-          // TODO port the verify ruby method
-          // "  def verify(&blk)\n" +
-          // "    yield\n" +
-          // "  rescue ExpectationNotMetError => ex\n" +
-          // "    @verification_errors << ex\n" +
-          // "  end\n" +
   indent: "4",
   initialIndents: "2",
   defaultExtension: "js"
