@@ -516,7 +516,7 @@ WDAPI.Utils = function() {
 };
 
 WDAPI.Utils.isElementPresent = function(how, what) {
-  return "isElementPresent(" + how + ", " + xlateArgument(what) + ")";
+  return "driver.findElement(wd.By." + how + "(" + xlateArgument(what) + "))";
 };
 
 WDAPI.Utils.isAlertPresent = function() {
