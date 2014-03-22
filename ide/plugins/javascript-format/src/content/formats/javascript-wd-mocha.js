@@ -337,9 +337,9 @@ this.options = {
           '\n' +
           '    afterEach(function (done) {\n' +
           '        driver.quit().then(function () {\n' +
+          '            verificationErrors.should.be.empty;\n' +
           '            done();\n' +
           '        });\n' +
-          '        verificationErrors.should.be.empty;\n' +
           '    });\n' +
           '\n' +
           '});\n',
