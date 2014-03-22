@@ -99,7 +99,6 @@ function assertTrue(expression) {
 }
 
 function assertFalse(expression) {
-  //return expression.invert().toString() + ".should be_false";
   var exp = expression.toString();
   var r = exp.match(/^(.+)\.([0-9A-Za-z_]+)\?$/);
   if (r && r.length == 3) {
@@ -165,9 +164,9 @@ RegexpNotMatch.prototype.verify = function() {
 
 function waitFor(expression) {
   if (expression.negative) {
-    return "!60.times{ break unless (" + expression.invert().toString() + " rescue true); sleep 1 }"
+    return "driver.wait(function () { return " + expression.invert().toString() + "; }, 60);";
   } else {
-    return "!60.times{ break if (" + expression.toString() + " rescue false); sleep 1 }"
+    return "driver.wait(function () { return " + expression.toString() + "; }, 60);";
   }
 }
 
