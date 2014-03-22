@@ -175,7 +175,7 @@ function assertOrVerifyFailure(line, isAssert) {
 }
 
 function pause(milliseconds) {
-  return "sleep " + (parseInt(milliseconds) / 1000);
+  return "driver.sleep(" + parseInt(milliseconds, 10) + ")";
 }
 
 function echo(message) {
@@ -325,7 +325,6 @@ this.options = {
           "    it('${methodName}', function (done) {\n",
   footer: '        done();\n' +
           '    });\n' +
-          // '\n' +
           '\n' +
           '    afterEach(function (done) {\n' +
           '        driver.quit().then(function () {\n' +
@@ -403,11 +402,11 @@ WDAPI.Driver.searchContext = function(locatorType, locator) {
 };
 
 WDAPI.Driver.prototype.back = function() {
-  return this.ref + ".navigate.back";
+  return this.ref + ".navigate().back()";
 };
 
 WDAPI.Driver.prototype.close = function() {
-  return this.ref + ".close";
+  return this.ref + ".close()";
 };
 
 WDAPI.Driver.prototype.findElement = function(locatorType, locator) {
@@ -415,18 +414,18 @@ WDAPI.Driver.prototype.findElement = function(locatorType, locator) {
 };
 
 WDAPI.Driver.prototype.findElements = function(locatorType, locator) {
-  return new WDAPI.ElementList(this.ref + ".find_elements(" + WDAPI.Driver.searchContext(locatorType, locator) + ")");
+  return new WDAPI.ElementList(this.ref + ".findElements(" + WDAPI.Driver.searchContext(locatorType, locator) + ")");
 };
 
 WDAPI.Driver.prototype.getCurrentUrl = function() {
-  return this.ref + ".current_url";
+  return this.ref + ".getCurrentUrl()";
 };
 
 WDAPI.Driver.prototype.get = function(url) {
   if (url.length > 1 && (url.substring(1,8) == "http://" || url.substring(1,9) == "https://")) { // url is quoted
-    return this.ref + ".get " + url;
+    return this.ref + ".get(" + url + ")";
   } else {
-    return this.ref + ".get(@base_url + " + url + ")";
+    return this.ref + ".get(baseUrl + " + url + ")"
   }
 };
 
@@ -447,7 +446,7 @@ WDAPI.Driver.prototype.chooseCancelOnNextConfirmation = function() {
 };
 
 WDAPI.Driver.prototype.refresh = function() {
-  return this.ref + ".navigate.refresh";
+  return this.ref + ".navigate().refresh()";
 };
 
 WDAPI.Element = function(ref) {
@@ -463,19 +462,19 @@ WDAPI.Element.prototype.click = function() {
 };
 
 WDAPI.Element.prototype.getAttribute = function(attributeName) {
-  return this.ref + ".attribute(" + xlateArgument(attributeName) + ")";
+  return this.ref + ".getAttribute(" + xlateArgument(attributeName) + ")";
 };
 
 WDAPI.Element.prototype.getText = function() {
-  return this.ref + ".text";
+  return this.ref + ".getText()";
 };
 
 WDAPI.Element.prototype.isDisplayed = function() {
-  return this.ref + ".displayed?";
+  return this.ref + ".isDisplayed()";
 };
 
 WDAPI.Element.prototype.isSelected = function() {
-  return this.ref + ".selected?";
+  return this.ref + ".isSelected()";
 };
 
 WDAPI.Element.prototype.sendKeys = function(text) {
@@ -483,7 +482,7 @@ WDAPI.Element.prototype.sendKeys = function(text) {
 };
 
 WDAPI.Element.prototype.submit = function() {
-  return this.ref + ".submit";
+  return this.ref + ".submit()";
 };
 
 WDAPI.Element.prototype.select = function(selectLocator) {
