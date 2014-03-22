@@ -43,8 +43,9 @@ Equals.prototype.toString = function() {
   return this.e2.toString() + " === " + this.e1.toString();
 };
 
+// Unlike the other language bindings, which all provide blocking APIs, WebDriverJS is purely asynchronous.
 Equals.prototype.assert = function() {
-  return "(" + this.e2.toString() + ").should.equal(" + this.e1.toString() + ")";
+  return this.e2.toString() + ".then(function (value) { value.should.equal(" + this.e1.toString() + "); })";
 };
 
 Equals.prototype.verify = function() {
@@ -55,8 +56,9 @@ NotEquals.prototype.toString = function() {
   return this.e1.toString() + " !== " + this.e2.toString();
 };
 
+// Unlike the other language bindings, which all provide blocking APIs, WebDriverJS is purely asynchronous.
 NotEquals.prototype.assert = function() {
-  return "(" + this.e2.toString() + ").should.not.equal(" + this.e1.toString() + ")";
+  return this.e2.toString() + ".then(function (value) { value.should.not.equal(" + this.e1.toString() + "); })";
 };
 
 NotEquals.prototype.verify = function() {
