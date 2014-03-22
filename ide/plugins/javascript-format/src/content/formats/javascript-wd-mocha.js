@@ -49,7 +49,8 @@ Equals.prototype.assert = function() {
 };
 
 Equals.prototype.verify = function() {
-  return verify(this.assert());
+  return this.e2.toString() + ".then(function (value) { verify(function () { value.should.equal(" +
+    this.e1.toString() + "); }); })";
 };
 
 NotEquals.prototype.toString = function() {
@@ -62,7 +63,8 @@ NotEquals.prototype.assert = function() {
 };
 
 NotEquals.prototype.verify = function() {
-  return verify(this.assert());
+  return this.e2.toString() + ".then(function (value) { verify(function () { value.should.not.equal(" +
+    this.e1.toString() + "); }); })";
 };
 
 function joinExpression(expression) {
