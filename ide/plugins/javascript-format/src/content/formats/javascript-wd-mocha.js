@@ -508,11 +508,11 @@ WDAPI.ElementList.prototype.getItem = function(index) {
 };
 
 WDAPI.ElementList.prototype.getSize = function() {
-  return this.ref + ".size";
+  return this.ref + ".length";
 };
 
 WDAPI.ElementList.prototype.isEmpty = function() {
-  return this.ref + ".empty?";
+  return this.ref + ".length === 0";
 };
 
 
