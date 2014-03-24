@@ -5,3 +5,4 @@ mozilla_extension(name = "javascript-format",
   chrome = "src/chrome.manifest.production",
   install = "src/install.rdf")
 
+
