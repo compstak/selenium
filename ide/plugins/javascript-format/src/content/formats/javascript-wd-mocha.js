@@ -318,7 +318,7 @@ this.options = {
           '    beforeEach(function (done) {\n' +
           "        driver = require('./client.js').driver.build();\n" +
           '        driver.manage().timeouts().implicitlyWait(30000);\n' +
-          "        baseUrl = '${baseURL}';\n" +
+          "        baseUrl = process.env.BASE_URL || '${baseURL}';\n" +
           '        verificationErrors = [];\n' +
           '        done();\n' +
           '    });\n' +
