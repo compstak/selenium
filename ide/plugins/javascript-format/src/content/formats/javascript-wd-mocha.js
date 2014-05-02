@@ -319,7 +319,7 @@ this.options = {
           '    var verificationErrors;\n' +
           '\n' +
           '    beforeEach(function (done) {\n' +
-          "        driver = require('./client.js').driver;\n" +
+          "        driver = require('./client.js').driver.build();\n" +
           '        driver.manage().timeouts().implicitlyWait(30000);\n' +
           "        baseUrl = '${baseURL}';\n" +
           '        verificationErrors = [];\n' +
