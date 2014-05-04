@@ -288,7 +288,7 @@ function formatSuite(testSuite, filename) {
   for (var i = 0; i < testSuite.tests.length; ++i) {
     // have saved or loaded a suite
     if (typeof testSuite.tests[i].filename !== 'undefined') {
-      formattedSuite += "require(__dirname + '/' + '" + filename + '/' + testSuite.tests[i].filename.replace(/\.\w+$/, '') + "');\n";
+      formattedSuite += "require(__dirname + '/' + '" + filename + '/' + testSuite.tests[i].filename.replace(/\.\w+$/, '').replace(/\.js$/, '') + "');\n";
     } else {
       // didn't load / save as a suite
       var testFile = testSuite.tests[i].getTitle();
