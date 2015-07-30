@@ -283,19 +283,16 @@ this.sendKeysMaping = {
  * @param filename   the file the formatted suite will be saved as
  */
 function formatSuite(testSuite, filename) {
-  formattedSuite = "var webdriver = require('selenium-webdriver');\n" +
-      "var driver = require('./client.js').driver;\n" +
-      '\n' +
-      '\n';
+  formattedSuite = '';
 
   for (var i = 0; i < testSuite.tests.length; ++i) {
     // have saved or loaded a suite
-    if (typeof testSuite.tests[i].filename != 'undefined') {
-      formattedSuite += 'require File.join(File.dirname(__FILE__),  "' + testSuite.tests[i].filename.replace(/\.\w+$/, '') + '")\n';
+    if (typeof testSuite.tests[i].filename !== 'undefined') {
+      formattedSuite += "require(__dirname + '/' + '" + filename.replace(/\.js$/, '') + '/' + testSuite.tests[i].filename.replace(/\.\w+$/, '') + ".js');\n";
     } else {
       // didn't load / save as a suite
       var testFile = testSuite.tests[i].getTitle();
-      formattedSuite += 'require "' + testFile + '"\n';
+      formattedSuite += "require('" + testFile + "')\n";
     }
   }
   return formattedSuite;
@@ -319,9 +316,9 @@ this.options = {
           '    var verificationErrors;\n' +
           '\n' +
           '    beforeEach(function (done) {\n' +
-          "        driver = require('./client.js').driver;\n" +
+          "        driver = require('./client.js').driver.build();\n" +
           '        driver.manage().timeouts().implicitlyWait(30000);\n' +
-          "        baseUrl = '${baseURL}';\n" +
+          "        baseUrl = process.env.BASE_URL || '${baseURL}';\n" +
           '        verificationErrors = [];\n' +
           '        done();\n' +
           '    });\n' +
